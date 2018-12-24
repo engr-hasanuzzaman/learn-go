@@ -15,7 +15,7 @@ func main()  {
 	printPyramid(inputSize)
 }
 
-func printPyramid (var size int){
+func printPyramid (size int){
 	for i := 0; i <= size; i++ {
 		for j := 0; j <= i; j++ {
 			fmt.Printf("*")
