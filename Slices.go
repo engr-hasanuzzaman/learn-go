@@ -34,4 +34,19 @@ func main()  {
 	for i, value := range s1 {
 		Println("index = ", i, "value is", value) 
 	}
+
+	// make with slice size
+	list1 := make([]int, 5, 10)
+	Println("size of list1 is", len(list1))
+	list1 = append(list1, 0, 6)
+	list1 = append(list1, 1, 7)
+	list1 = append(list1, 2, 8)
+	list1 = append(list1, 3, 9)
+	Println(list1)
+
+	// array copy
+	a1 := []int {1,2,3,4,5}
+	a2 := make([]int, 10)
+	copy(a2, a1)
+	Println(a2)
 }
