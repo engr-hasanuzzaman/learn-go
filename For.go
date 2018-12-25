@@ -11,15 +11,18 @@ func main()  {
 	}
 
 	var inputSize int;
-	fmt.Scanf("Inter pyramid size %d", inputSize)
+	fmt.Println("Inter pyramid size")
+	fmt.Scan(&inputSize)
 	printPyramid(inputSize)
 }
 
 func printPyramid (size int){
-	for i := 0; i <= size; i++ {
-		for j := 0; j <= i; j++ {
+	i := 1
+	for i <= size {
+		for j := 1; j <= i; j++ {
 			fmt.Printf("*")
 		}
 		fmt.Println("")
+		i++
 	}
 }
