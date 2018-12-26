@@ -1,8 +1,16 @@
 package main
 import (
-	"fmt"
+	"net/http"
+	"github.com/labstack/echo"
 )
 
+func index(c echo.Context) error {
+	return c.String(http.StatusOK, "wellcome to echo world")
+}
+
 func main()  {
-	fmt.Println("go is setup")
+	e := echo.New()
+
+	e.GET("/", index)
+	e.Logger.Fatal(e.Start(":1234"))
 }
