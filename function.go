@@ -21,6 +21,7 @@ func main()  {
 	defer printOne() 
 	printTwo()
 	Println("end of main")
+	foo()
 }
 
 // normalt function
@@ -40,4 +41,15 @@ func printOne(){
 
 func printTwo(){
 	Println(2)
+}
+
+// defer panic and recover
+func foo(){
+	defer func ()  {
+		err := recover()
+		Println("panic has been occured", err)
+		Println("recovering")
+	}()
+
+	panic("I am paniccing")
 }
