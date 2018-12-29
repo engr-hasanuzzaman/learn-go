@@ -19,6 +19,7 @@ func main()  {
 	e.GET("/users/:id", showUser)
 	e.PUT("/users/:id", updateUser)
 	e.DELETE("/users/:id", deleteUser)
+	e.GET("/users/search", searchUser)
 
 	// 
 	e.Logger.Fatal(e.Start(":5000"))
@@ -42,6 +43,11 @@ func allUser(c echo.Context) error {
 
 func updateUser(c echo.Context) error {
 	return c.String(http.StatusOK, "Update user " + c.Param("id") + "\n")
+}
+
+func searchUser(c echo.Context) error {
+	// title := c.QueryParam("title")
+	return c.String(http.StatusOK, "passing search tearm are " + c.QueryParam("title") + "\n")
 }
 
 func createUser(c echo.Context) error {
