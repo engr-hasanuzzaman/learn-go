@@ -2,15 +2,21 @@ package main
 import (
 	"net/http"
 	"github.com/labstack/echo"
+	_ "github.com/labstack/echo/middleware"
+	"github.com/labstack/gommon/log"
 	_ "handler"
 )
 
 func index(c echo.Context) error {
-	return c.String(http.StatusOK, "wellcome to echo world")
+	// return c.String(http.StatusOK, "wellcome to echo world")
+	return c.File("public/index.html")
 }
 
 func main()  {
 	e := echo.New()
+	// Middleware
+	// e.Use(middleware.Logger())
+	// e.Use(middleware.Recover())
 
 	e.GET("/", index)
 	// user routes
@@ -33,6 +39,7 @@ type User struct{
 
 // user route handler
 func showUser(c echo.Context) error {
+	log.Info("this is info log")
 	id := c.Param("id")
 	return c.String(http.StatusOK, "User id " + id + "\n")
 }
