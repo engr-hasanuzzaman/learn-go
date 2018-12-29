@@ -26,9 +26,9 @@ func main()  {
 }
 
 type User struct{
-	Name string `json:"name"`
-	Title int `json:"title"`
-	Rattings []int `json:"rattings"`
+	Name string `json:"name" xml:"name" query:"name" form:"name"`
+	Title string `json:"title" xml:"title" query:"title" form:"title"`
+	Rattings []int `json:"rattings" xml:"rattings" query:"rattings" form:"rattings"`
 }
 
 // user route handler
@@ -51,7 +51,12 @@ func searchUser(c echo.Context) error {
 }
 
 func createUser(c echo.Context) error {
-	return c.String(http.StatusOK, "New user created\n")
+	user := new(User)
+	if err := c.Bind(user); err != nil {
+		return err
+	}
+
+	return c.JSON(http.StatusOK, user)
 }
 
 func deleteUser(c echo.Context) error {
