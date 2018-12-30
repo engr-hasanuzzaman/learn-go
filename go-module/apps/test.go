@@ -1,5 +1,5 @@
 package apps
 
-func Msg(){
+func Msg() string{
 	return "importing is success"
 }

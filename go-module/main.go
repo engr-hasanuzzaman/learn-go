@@ -4,9 +4,11 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/labstack/gommon/log"
+	"github.com/engr-hasanuzzaman/test/apps"
 )
 
 func index(c echo.Context) error {
+	log.Info(apps.Msg())
 	return c.String(http.StatusOK, "wellcome to echo world")
 }
 
