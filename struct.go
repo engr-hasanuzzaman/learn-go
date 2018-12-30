@@ -8,8 +8,8 @@ func main()  {
 	person := Person{ "hasanuzzaman", "sumon", 29, "male" }
 	Println("person structure is ", person)
 	Println("person full-name is", person.fullName())
-	// test := Test{"sumon", 30}
-	r, _ := json.Marshal(person)
+	test := Test{"sumon", 30}
+	r, _ := json.Marshal(test)
 	Println("marshalling structure", string(r))
 }
 
