@@ -7,8 +7,7 @@ import (
 )
 
 func index(c echo.Context) error {
-	// return c.String(http.StatusOK, "wellcome to echo world")
-	return c.File("public/index.html")
+	return c.String(http.StatusOK, "wellcome to echo world")
 }
 
 func main()  {
