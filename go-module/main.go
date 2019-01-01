@@ -13,7 +13,10 @@ import (
 func index(c echo.Context) error {
 	log.Info(apps.Msg())
 	// return c.String(http.StatusOK, "wellcome to echo world")
-	return c.Render(http.StatusOK, "hello", "<h1>Hello World</h1>")
+	return c.Render(http.StatusOK, "hello", map[string]interface{}{
+		"title": "hello",
+		"msg": "Hello from index",
+	})
 }
 
 func main()  {
