@@ -7,11 +7,10 @@ import (
 	"html/template"
 	"io"
 
-	"github.com/engr-hasanuzzaman/test/apps"
+	"github.com/engr-hasanuzzaman/test/handler"
 )
 
 func index(c echo.Context) error {
-	log.Info(apps.Msg())
 	// return c.String(http.StatusOK, "wellcome to echo world")
 	return c.Render(http.StatusOK, "hello", map[string]interface{}{
 		"title": "hello",
@@ -30,7 +29,7 @@ func main()  {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.GET("/", index)
+	e.GET("/", handler.Index)
 	// user routes
 	e.POST("/users", createUser)
 	e.GET("/users", allUser)
