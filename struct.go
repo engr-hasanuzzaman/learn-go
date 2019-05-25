@@ -5,7 +5,7 @@ import(
 	)
 
 func main()  {
-	person := Person{ "hasanuzzaman", "sumon", 29, "male" }
+	person := Person{ "hasanuzzaman", "sumon", "male", 29 }
 	Println("person structure is ", person)
 	Println("person full-name is", person.fullName())
 	test := Test{"sumon", 30}
@@ -14,10 +14,8 @@ func main()  {
 }
 
 type Person struct {
-	firstName string
-	lastName string
+	firstName, lastName, gender string
 	age int
-	gender string
 }
 
 type Test struct {
