@@ -1,7 +1,15 @@
 package main
-import "test/adder"
-import . "fmt"
 
-func main(){
-	Println("sum of 2 and 3 is", adder.Add(2, 3))
+import (
+	_ "net/http"
+	
+	"github.com/labstack/echo"
+	"test/handler"
+)
+
+func main() {
+	e := echo.New()
+	e.GET("/", handler.Index)
+	e.GET("/hello", handler.Hello)
+	e.Logger.Fatal(e.Start(":1323"))
 }
