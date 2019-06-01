@@ -6,7 +6,9 @@ import(
 
 func main()  {
 	person := Person{ "hasanuzzaman", "sumon", "male", 29 }
+	p1 := Person(firstName: "hasanuzzaman", lastName: "sumon", gender: "male", age: 29)
 	Println("person structure is ", person)
+	Println("person structure is ", p1)
 	Println("person full-name is", person.fullName())
 	test := Test{"sumon", 30}
 	r, _ := json.Marshal(test)
