@@ -1,12 +1,14 @@
 package main
-import(
+
+import (
 	"fmt"
 	"sync"
 )
+
 var x int
 var wg sync.WaitGroup
 
-func main()  {
+func main() {
 	wg.Add(2)
 	go doStaf1()
 	go doStaf2()
@@ -14,21 +16,22 @@ func main()  {
 	fmt.Println(x)
 }
 
-func doStaf1()  {
+func doStaf1() {
 	x = x + 1
 	wg.Done()
 }
 
-func doStaf2()  {
+func doStaf2() {
 	x = x + 4
 	wg.Done()
 }
+
 /*
-A race condition occurs when two or more goroutines can access shared data and they try to change it at the same time. 
-Because the goroutine scheduling algorithm can swap between routines at any time, you don't know the order in which the routines will attempt to access the shared data. 
+A race condition occurs when two or more goroutines can access shared data and they try to change it at the same time.
+Because the goroutine scheduling algorithm can swap between routines at any time, you don't know the order in which the routines will attempt to access the shared data.
 Most importantly, inteleaving does not happen on go code level rather than it is on machine instruction level that can perform interleaved for single go statement.
 
-Therefore, the result of the change in data is dependent on the scheduling algorithm, 
+Therefore, the result of the change in data is dependent on the scheduling algorithm,
 i.e. both routines are "racing" to access/change the data.
 
 For example, on the above program the value of x is not predictable as any of doStaf1 or doStaf2 can complte their task in unpredictable order.
