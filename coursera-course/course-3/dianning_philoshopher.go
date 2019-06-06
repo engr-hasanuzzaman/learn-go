@@ -26,7 +26,7 @@ func main() {
 	
 	for i := 0; i < num; i++ {
 		philosophers[i] = &philosopher{
-			id: i, nOfEat: 0, leftFork: forks[i], rightFork: forks[(i+1)%num]}
+			id: i + 1, nOfEat: 0, leftFork: forks[i], rightFork: forks[(i+1)%num]}
 	}
 
 	for i := 0; i < 16; i++ {
