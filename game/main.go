@@ -6,13 +6,24 @@ import(
 	"os"
 	"log"
 	"time"
+	"flag"
+	"math/rand"
 ) 
+const QUIZ_DURATION = 30
+const Q_FILE_PATH = "problems.csv"
 
 func main()  {
-	// wait_sec := 15
+	var qDuration int
+	var filePath string
+	
+	// parsing cmd options
+	flag.IntVar(&qDuration, "time", QUIZ_DURATION, "int value")
+	flag.StringVar(&filePath, "filepath", Q_FILE_PATH, "int value")
+	flag.Parse()
+
 	n_correct_answer := 0
 	// user_answer := ""
-	csv_file, err := os.Open("problems.csv")
+	csv_file, err := os.Open(filePath)
 	if err != nil {
 		log.Fatalln("Could not open file ", err)
 	}
@@ -23,8 +34,11 @@ func main()  {
 		log.Fatal("error ", err)
 	}
 
-	timer := time.NewTimer(10 * time.Second)
+	timer := time.NewTimer(time.Duration(qDuration) * time.Second)
 	questions_set := make_problem_set(lines)
+	fmt.Println("before suffle ", 	questions_set)
+	questions_set = suffle(questions_set)
+	fmt.Println("after suffle ", 	questions_set)
 	problem:
 					for i, p := range questions_set {
 						fmt.Printf("Q. %d: %s = ", i, p.q)
@@ -62,4 +76,12 @@ func make_problem_set(lines [][]string) []problem {
 	}
 	
 	return res
-} 
+}
+
+func suffle(a []problem)([]problem) {
+	for i := range a {
+		j := rand.Intn(1000 + 1) % len(a)
+    a[i], a[j] = a[j], a[i]
+	}
+	return a
+}
