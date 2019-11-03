@@ -5,12 +5,12 @@ import(
 	_ "io"
 	"os"
 	"log"
+	"time"
 ) 
 
 func main()  {
 	// wait_sec := 15
 	n_correct_answer := 0
-	q_counter := 0
 	// user_answer := ""
 	csv_file, err := os.Open("problems.csv")
 	if err != nil {
@@ -23,27 +23,29 @@ func main()  {
 		log.Fatal("error ", err)
 	}
 
+	timer := time.NewTimer(10 * time.Second)
 	questions_set := make_problem_set(lines)
-	fmt.Println(questions_set[0].a)
-	// for {
-	// 	record, err := r.Read()
-		
-	// 	if err == io.EOF {
-	// 		break
-	// 	}
+	problem:
+					for i, p := range questions_set {
+						fmt.Printf("Q. %d: %s = ", i, p.q)
+						answerCh := make(chan string)
+						go func ()  {
+							var ans string
+							fmt.Scanf("%s", &ans)
+							answerCh <- ans
+						}()
 
-	// 	if err != nil {
-	// 		log.Fatal("CSV read error")
-	// 	}
-	// 	fmt.Printf("What is %s = \n", record[0])
-	// 	q_counter += 1
-	// 	fmt.Scanf("%s", &user_answer)
-	// 	if user_answer == record[1] {
-	// 		n_correct_answer += 1
-	// 	}
-	// }
+						select {
+						case <-timer.C:
+							break problem
+						case a := <-answerCh:
+							if a == p.a {
+								n_correct_answer += 1
+							}
+						}
+					}
 
-	fmt.Printf("Number of correct answer is %d out or %d \n", n_correct_answer, q_counter)
+	fmt.Printf("Number of correct answer is %d out or %d \n", n_correct_answer, len(questions_set))
 }
 
 /* stuct for keeping problem */ 
