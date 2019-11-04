@@ -2,7 +2,6 @@ package main
 import(
 	"fmt"
 	"encoding/csv"
-	_ "io"
 	"os"
 	"log"
 	"time"
