@@ -10,11 +10,25 @@ import (
 
 func main() {
   app := cli.NewApp()
-  app.Name = "profile"
-	app.Usage = "Browse my command line profile"
-	
+
+  app.Flags = []cli.Flag {
+    cli.StringFlag{
+      Name: "lang",
+      Value: "english",
+      Usage: "language for the greeting",
+    },
+  }
+
   app.Action = func(c *cli.Context) error {
-    fmt.Println("My commandline profile")
+    name := "Nefertiti"
+    if c.NArg() > 0 {
+      name = c.Args().Get(0)
+    }
+    if c.String("lang") == "spanish" {
+      fmt.Println("Hola", name)
+    } else {
+      fmt.Println("Hello", name)
+    }
     return nil
   }
 
