@@ -9,14 +9,40 @@ import (
 )
 
 func main() {
+  var language string
+
   app := cli.NewApp()
 
+  app.Flags = []cli.Flag {
+    cli.StringFlag{
+      Name:        "lang",
+      Value:       "english",
+      Usage:       "language for the greeting",
+      // Destination: &language,
+    },
+    {
+      Name:        "lang",
+      Value:       "bn",
+      Usage:       "language for the greeting",
+      // Destination: &language,
+    },
+  }
+
   app.Action = func(c *cli.Context) error {
-    fmt.Println("All the arguments passed as command argument are")
-    for i := 0; i < len(c.Args()); i++ {
-      fmt.Printf("%d th value is %s \n", i, c.Args()[i])  
+    name := "someone"
+    language = c.String("lang")
+    if c.NArg() > 0 {
+      name = c.Args()[0]
     }
-    // fmt.Printf("Hello %q", c.Args().Get(0))
+
+    if language == "bd" {
+      fmt.Println("Apnake sagotom ", name)
+    }else if language == "spanish" {
+      fmt.Println("Hola", name)
+    } else {
+      fmt.Println("Hello", name)
+    }
+    
     return nil
   }
 
