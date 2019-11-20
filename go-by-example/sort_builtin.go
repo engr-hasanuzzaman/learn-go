@@ -14,4 +14,5 @@ func main(){
 	fmt.Println("Before sorting the array is ", strInputs)
 	sort.Strings(strInputs)
 	fmt.Println("After sorting the array is ", strInputs)
+	fmt.Println("Is str array are sorted?", sort.StringsAreSorted(strInputs))
 }
