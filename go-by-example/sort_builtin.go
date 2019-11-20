@@ -9,4 +9,9 @@ func main(){
 	fmt.Println("Before sorting the array is ", intInputs)
 	sort.Ints(intInputs)
 	fmt.Println("After sorting the array is ", intInputs)
+
+	strInputs := []string {"This", "is","sample","string", "and", "nothing", "else", "-0", "22", "1"}
+	fmt.Println("Before sorting the array is ", strInputs)
+	sort.Strings(strInputs)
+	fmt.Println("After sorting the array is ", strInputs)
 }
